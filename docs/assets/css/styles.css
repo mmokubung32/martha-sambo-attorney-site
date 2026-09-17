@@ -217,7 +217,7 @@ p { max-width: 62ch; }
 .site-header {
   position: fixed;
   top: 0; left: 0; right: 0;
-  z-index: 100;
+  z-index: 200;
   padding: 1.1rem var(--edge);
   display: flex;
   align-items: center;
@@ -307,7 +307,7 @@ p { max-width: 62ch; }
   color: var(--paper);
   place-items: center;
   position: relative;
-  z-index: 210;
+  z-index: 1;
 }
 .nav-toggle span, .nav-toggle span::before, .nav-toggle span::after {
   content: "";
@@ -331,6 +331,8 @@ p { max-width: 62ch; }
   flex-direction: column;
   justify-content: center;
   padding: var(--edge);
+  padding-top: clamp(6.5rem, 24vw, 8.5rem);
+  overflow-y: auto;
   transform: translateY(-100%);
   transition: transform 0.55s var(--ease);
 }
@@ -349,6 +351,22 @@ p { max-width: 62ch; }
   margin-top: 3rem;
   color: #a19a83;
   font-size: 0.9rem;
+}
+
+/* -------------------------------- Responsive header (this was missing) ---------------------------------- */
+/* Below 900px there isn't room for the full link list + CTA in the header,
+   so we switch to: logo + hamburger only, with links, CTA and contact
+   details living in the full-screen .mobile-menu instead. */
+@media (max-width: 900px) {
+  .main-nav { display: none; }
+  .nav-cta .btn-primary { display: none; }
+  .nav-toggle { display: grid; }
+}
+
+/* Tighten the header edge padding and logo lockup a little further down,
+   so the seal mark + wordmark never crowd the hamburger on small phones. */
+@media (max-width: 420px) {
+  .seal-name span { display: none; }
 }
 
 /* -------------------------------- Side rail dot nav (index only) ---------------------------------- */
